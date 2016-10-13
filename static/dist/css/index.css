@@ -1,0 +1,71 @@
+*{
+    font-family: "Microsoft YaHei", "Lato", Helvetica, Arial, sans-serif;
+}
+div#back_top{
+    position:fixed;
+    right:10px;
+    bottom: 105px;
+}
+#Login-Register-Modal,#Add-Item-Modal{
+    top: 40px;
+}
+textarea{
+    resize: vertical;
+}
+div.article p.title a{
+    font-size: 18px;
+}
+div.article li span{
+    cursor: pointer;
+}
+#func ul li{
+    margin:10px 20px 10px 0;
+}
+#func ul li .recommend,.favorite,.comment{
+    font-size: 18px;
+}
+div.article div.comment-box{
+    border:1px solid lightgrey;
+}
+div.comment-box span{
+    margin-right:40px;
+}
+div.comment-box div:hover{
+    background-color: darkgrey;
+}
+div.article{
+    padding-left:20px;
+    margin-left:-20px;
+    border-left: 2px solid #3676a1;
+}
+div.comment-line{
+    margin-top: 2px!important;
+    margin-bottom: 2px!important;
+    padding-left: 15px;
+    line-height: 24px;
+}
+div.article hr{
+    margin:2px;
+    padding: 2px;
+}
+
+/*----------------------------------------
+    页脚
+    ------------------------------------*/
+footer {
+    background: #3676a1;
+    color: #eee;
+    font-size: 12px;
+    padding: 10px 0 10px 0;
+}
+ul.unstyled {
+    list-style: none;
+    padding: 0;
+}
+footer h6 {
+    font-size: 16px;
+    color: white;
+}
+footer ul li a{
+    color:white;
+}

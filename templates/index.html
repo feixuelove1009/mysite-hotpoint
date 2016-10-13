@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link href="/static/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/dist/css/index.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body onscroll="show();">
+    <!--登录及注册模态框-->
+    <div class="modal in" id="Login-Register-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <div class="pull-left" style="width:50%">登录
+                        <span class="login-message"></span>
+                    </div>
+                    <div class="pull-left">注册
+                        <span class="register-message"></span>
+                    </div>
+                </div>
+                <div class="modal-body container">
+                    <div  class="row">
+                        <!--登录表单-->
+                        <div class="col-md-3">
+                            <form id="login" class="form-horizontal col-md-10" role="form">
+                              <div class="form-group has-feedback">
+                                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                  <label class="sr-only" for="Username">用户名</label>
+                                  <input type="text" class="form-control" name="username" id="Username" placeholder="Username" />
+                              </div>
+                              <div class="form-group has-feedback">
+                                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                  <label class="sr-only" for="Password">密码</label>
+                                  <input type="password" class="form-control" name="password" id="Password" placeholder="Password" />
+                              </div>
+
+                              <div class="checkbox">
+                                  <label>
+                                    <input type="checkbox"> 记住密码
+                                  </label>
+
+                              <button type="submit" class="btn btn-primary pull-right">登录</button>
+                              </div>
+                            </form>
+                        </div>
+                        <!--注册表单-->
+                        <div class="col-md-3" style="border-left: 1px solid grey">
+                            <form id="register" class="form-horizontal col-md-10" role="form">
+                                <div class="form-group has-feedback">
+                                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                    <label class="sr-only" for="Username">用户名</label>
+                                    <input type="text" class="form-control" name="username" id="Username" placeholder="Username" />
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                    <label class="sr-only" for="Password1">密码</label>
+                                    <input type="password" class="form-control" name="password" id="Password1" placeholder="Password" />
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                    <label class="sr-only" for="Password2">密码</label>
+                                    <input type="password" class="form-control" name="password_confirm" id="Password2" placeholder="Password" />
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                    <label class="sr-only" for="Email">邮箱</label>
+                                    <input type="email" class="form-control" name="email" id="Email" placeholder="Email" />
+                                </div>
+                                <input type="reset" class="btn btn-default" value="重置"/>
+                                <button type="submit" class="btn btn-success pull-right">注册</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--发布内容模态框-->
+    <div class="modal in" id="Add-Item-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <span class="modal-title" id="myModalLabel-2">分享新发现</span><span></span>
+                </div>
+                <div class="modal-body container">
+                    <div class="col-md-6">
+                        <div class="row">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="javascript:void(0);">链接</a></li>
+                            <li role="presentation"><a href="javascript:void(0);">文字</a></li>
+                            <li role="presentation"><a href="javascript:void(0);">图片</a></li>
+                        </ul>
+                        </div >
+
+                        <div id="AddLink">
+                            <div class="row">
+                                <form role="form">
+                                    <div class="form-group">
+                                      <label for="Link">添加链接</label>
+                                      <div class="row">
+                                          <div class="col-md-9">
+                                              <input type="text" class="form-control" id="Link" placeholder="http://"/>
+                                          </div>
+                                          <a class="btn btn-primary" id="gain_title">获取标题</a>
+                                      </div>
+                                  </div>
+                                    <fieldset disabled>
+                                        <div class="form-group has-feedback">
+                                            <label for="Title">标题</label>
+                                            <input type="text" class="form-control" id="Title"/>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <label for="Abstract">添加摘要（选填）</label>
+                                            <textarea class="form-control" id="Abstract" rows="3"></textarea>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="row">
+                            <ul class="nav nav-pills" role="tablist">
+                                <li>发布到:</li>
+                                <li role="presentation"><span class="btn btn-primary selected">51区</span></li>
+                                <li role="presentation"><span class="btn btn-default">段子</span></li>
+                                <li role="presentation"><span class="btn btn-default">图片</span></li>
+                            </ul>
+                            <button type="submit" id="publish" class="btn btn-primary pull-right col-md-offset-1 disabled">发布</button>
+                            <button type="submit" id= "clear-link" class="btn btn-default pull-right ">清空</button>
+                        </div>
+                        </div>
+
+                        <div id="AddText"  class="hidden">
+                            <div class="row">
+                                <div class="form-group has-feedback">
+                                  <label for="add-text">添加段子</label>
+                                  <textarea class="form-control" id="add-text" rows="3" placeholder="发布段子..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <ul class="nav nav-pills" role="tablist">
+                                <li>发布到:</li>
+                                <li role="presentation"><span class="btn btn-primary selected">段子</span></li>
+                                </ul>
+                            </div>
+                            <button type="submit" id="publish-text" class="btn btn-primary pull-right col-md-offset-1 disabled">发布</button>
+                            <button type="submit" id= "clear-text" class="btn btn-default pull-right ">清空</button>
+                        </div>
+
+                        <div id="AddPic"  class="hidden">
+                            <div class="row">
+                                <div class="form-group has-feedback">
+                                  <label for="add-pic">添加图片</label>
+                                   <p><button class="btn btn-primary">上传</button> 支持jpg、jpeg、gif、png格式，且不超过5MB</p>
+                                  <textarea class="form-control" id="add-pic" rows="3" placeholder="请输入图片描述..."></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <ul class="nav nav-pills" role="tablist">
+                                    <li>发布到:</li>
+                                    <li role="presentation"><span class="btn btn-primary selected">图片</span></li>
+                                </ul>
+                                <button type="submit" id="publish-pic" class="btn btn-primary pull-right col-md-offset-1 disabled">发布</button>
+                                <button type="submit" id= "clear-pic" class="btn btn-default pull-right ">清空</button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{#        顶部导航条    #}
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <span class="sr-only">导航条</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/index/">HotPoint</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+
+                        <ul class="nav navbar-nav">
+                            {% if CURRENT_PART_ORDER.0 == "all" %}
+                                <li class="all active"><a href="/index/?part=all">全部</a></li>
+                                <li class="zone51"><a href="/index/?part=51">51区</a></li>
+                                <li class="text"><a href="/index/?part=text">段子</a></li>
+                            {% elif CURRENT_PART_ORDER.0 == "51" %}
+                                <li class="all"><a href="/index/?part=all">全部</a></li>
+                                <li class="zone51  active"><a href="/index/?part=51">51区</a></li>
+                                <li class="text"><a href="/index/?part=text">段子</a></li>
+                            {% elif CURRENT_PART_ORDER.0 == "text" %}
+                                <li class="all"><a href="/index/?part=all">全部</a></li>
+                                <li class="zone51"><a href="/index/?part=51">51区</a></li>
+                                <li class="text  active"><a href="/index/?part=text">段子</a></li>
+                            {% endif %}
+
+                            <li><a href="javascript:void(0);">图片</a></li>
+                            <li><a href="javascript:void(0);">你问我答</a></li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    更多
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="javascript:void(0);">视频</a></li>
+                                    <li><a href="javascript:void(0);">图片</a></li>
+                                    <li><a href="#javascript:void(0);">音乐</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="javascript:void(0);">历史精华</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="javascript:void(0);">收藏典范</a></li>
+                                </ul>
+                            </li>
+                          </ul>
+
+                        <form class="navbar-form navbar-right" >
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索">
+                            </div>
+                            <button type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if username %}
+                                <li class="dropdown">
+
+                                    <a id="user-position" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="/static/dist/img/image30.png" style="margin:-10px 0"/>
+                                        {{ username }}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0);">我的热点发布</a></li>
+                                        <li><a href="javascript:void(0);">我的收藏</a></li>
+                                        <li><a href="javascript:void(0);">我的推荐</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="javascript:void(0);">设置</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="/logout/">退出</a></li>
+                                    </ul>
+                            </li>
+                            {% else %}
+                                <li><a href="javascript:void(0);" data-toggle="modal" data-target="#Login-Register-Modal">注册</a></li>
+                                <li><a href="javascript:void(0);" data-toggle="modal" data-target="#Login-Register-Modal">登录</a></li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+    <!--主体内容-->
+    <div class="container">
+
+{#        头部按钮#}
+        <div class="row">
+
+            <p>11</p>
+            <p>11</p>
+            {% if CURRENT_PART_ORDER.1 == "time" %}
+                <a href="/index/?order_type=time" id="newest" class="btn btn-primary">最新</a>
+                <a href="/index/?order_type=comment" id="hot" class="btn btn-default">最热</a>
+            {% elif CURRENT_PART_ORDER.1 == "comment" %}
+                <a href="/index/?order_type=time" id="newest" class="btn btn-default">最新</a>
+                <a href="/index/?order_type=comment" id="hot" class="btn btn-primary">最热</a>
+            {% endif %}
+            <button class="btn btn-success col-md-offset-2" id="show-pub-box">
+                &nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;发布&nbsp;&nbsp;
+            </button>
+
+        </div>
+        <hr />
+    {#        分页导航条#}
+        <div class="row col-md-8">
+            {{ page_string }}
+        </div>
+        <div class="row col-md-8">
+            {% for article in article_list %}
+                <div class="article">
+                    <p class="title">
+                        <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+                        <span>{{ article.url_2 }}&nbsp;{{ article.type }}</span>
+                    </p>
+                    <p class="abstract">
+                        {{ article.abstract }}
+                    </p>
+                    <div id="func">
+                        <ul class="nav nav-pills" role="tablist">
+                            <li style="color:green;">
+                                <span class="glyphicon glyphicon-thumbs-up recommend"></span>
+                                <span class="badge recommend">{{ article.recommend.count }}</span>
+                            </li>
+                            <li style="color:blue">
+                                <span class="glyphicon glyphicon-comment comment"></span>
+                                <span class="badge comment">{{ article.comment_set.count }}</span>
+                            </li>
+                            <li style="color:red">
+                                <span class="glyphicon glyphicon-heart favorite"></span>
+                                <span class="badge favorite">{{ article.favorite.count }}</span>
+                            </li>
+
+                            <li>发布者：{{ article.user.name}}</li>
+                            <li>发布时间：{{ article.add_time }}</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <hr />
+            {% endfor %}
+        </div>
+{#        分页导航条#}
+        <div class="row col-md-8">
+            {{ page_string }}
+        </div>
+
+    </div>
+
+
+    <!--页脚开始-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <h6>&copy;HOTPOINT</h6>
+                </div>
+
+                <div class="col-sm-4">
+                    <h6>关于我</h6>
+                    <p>一个有内涵的男人。</p>
+                </div>
+
+                <div class="col-sm-2">
+                    <h6>导航</h6>
+                    <ul class="unstyled">
+                        <li><a href="">主页</a></li>
+                        <li><a href="">链接</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-2">
+                    <h6>Follow me</h6>
+                    <ul class="unstyled">
+                        <li><a href="">QQ</a></li>
+                        <li><a href="">微信</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-2">
+                    <h6>本网站由刘江制作</h6>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--页脚结束-->
+
+    <div id="back_top" class="hide">
+        <button class="btn btn-success">返回<br />顶部</button>
+    </div>
+    <script src="/static/plugins/jquery-1.12.4.js"></script>
+    <script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/plugins/validation/jquery.validate.js"></script>
+    <script src="/static/plugins/validation/messages_zh.js"></script>
+    <script src="/static/dist/js/register.js"></script>
+    <script src="/static/dist/js/login.js"></script>
+    <script src="/static/dist/js/index.js"></script>
+
+  </body>
+</html>
