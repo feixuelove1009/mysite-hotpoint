@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from django.shortcuts import redirect
-from django.utils.safestring import mark_safe
 from app01 import models
 from app01 import myform
 from app01 import pagination
@@ -263,7 +262,7 @@ def comment(request):
     def get_child_comment(father_comment):
         counter.append(0)
         data.append('<div class=" comment-line" style="margin: 10px 0px;"><span>')
-        data.append("&nbsp;" * ((len(counter)-1) * 8))
+        data.append("&nbsp;" * ((len(counter)-1) * 4))
         data.append(father_comment.text)
         data.append('</span><span> [')
         data.append(father_comment.user.name)
